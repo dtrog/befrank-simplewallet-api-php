@@ -1,6 +1,6 @@
-# PHP class for interaction with Karbo Simplewallet API
+# PHP class for interaction with BeFrank Simplewallet API
 
-Simple php class for interaction with [Karbo Simplewallet JSON RPC API](https://github.com/seredat/Karbo).
+Simple php class for interaction with [BeFrank Simplewallet JSON RPC API](https://github.com/befrank-project/befrank).
 
 ## Available methods ##
 * getBalance
@@ -22,8 +22,8 @@ Return wallet balance.
 ###### Example of usage: ######
 ```
 <?php
-	$krbWallet = new Karbo();
-	$balance = $krbWallet->getBalance();
+	$bfrWallet = new Befrank();
+	$balance = $bfrWallet->getBalance();
 ?>
 ```
 ###### Output data: ######
@@ -42,15 +42,15 @@ Returns wallet address.
 ###### Example of usage: ######
 ```
 <?php
-	$krbWallet = new Karbo();
-	$balance = $krbWallet->getAddress();
+	$bfrWallet = new Befrank();
+	$balance = $bfrWallet->getAddress();
 ?>
 ```
 ###### Output data: ######
 ```
 {
 	"status": true,
-	"address": "KctbUcra6R4DLHmDYbVvfrDBLQHxpjN2xVKs9EcmsDivXVWiu15uuF2YKgZfMPEYgT5dS4JGuJERmY46AwEVehwq35acL8f "
+	"address": "FctbUcra6R4DLHmDYbVvfrDBLQHxpjN2xVKs9EcmsDivXVWiu15uuF2YKgZfMPEYgT5dS4JGuJERmY46AwEVehwq35acL8f "
 }
 ```
 
@@ -61,8 +61,8 @@ Returns the last top known block height for simplewallet. This method can be use
 ###### Example of usage: ######
 ```
 <?php
-	$krbWallet = new Karbo();
-	$balance = $krbWallet->getHeight();
+	$bfrWallet = new Befrank();
+	$balance = $bfrWallet->getHeight();
 ?>
 ```
 ###### Output data: ######
@@ -80,8 +80,8 @@ Returns the list of all the wallet's incoming and outgoing transfers.
 ###### Example of usage: ######
 ```
 <?php
-	$krbWallet = new Karbo();
-	$balance = $krbWallet->getTransfers();
+	$bfrWallet = new Befrank();
+	$balance = $bfrWallet->getTransfers();
 ?>
 ```
 ###### Output data: ######
@@ -99,7 +99,7 @@ Returns the list of all the wallet's incoming and outgoing transfers.
 		"transactionHash": "5d67329ce94e8a127b1490b281feb13f74c18d0ac1dbe49338c1663c34a27738",
 		"unlock_time": 0
 	}, {
-		"address": "KeRRSeu1z1PYQz9eTWy8W4efGTMB9ZCbxayX85rRr5w8E1gqDMujgtPLeGPmvcT1DPjoU7iCpbrn7KJxMpJhUTfrJjcKGpt",
+		"address": "FeRRSeu1z1PYQz9eTWy8W4efGTMB9ZCbxayX85rRr5w8E1gqDMujgtPLeGPmvcT1DPjoU7iCpbrn7KJxMpJhUTfrJjcKGpt",
 		"amount": 1,
 		"fee": 0.0001,
 		"blockIndex": 201589,
@@ -114,14 +114,14 @@ Returns the list of all the wallet's incoming and outgoing transfers.
 
 ### getPayments ###
 
-Receives all the payments with a corresponding payment_id that were sent to the wallet. This method is used to get the KRB payments for the 3rd party services. As Karbo uses only one address to receive KRB deposits, a unique payment_id should be assigned and shown to each user. The method will return all the payments for this user.
+Receives all the payments with a corresponding payment_id that were sent to the wallet. This method is used to get the KRB payments for the 3rd party services. As Befrank uses only one address to receive KRB deposits, a unique payment_id should be assigned and shown to each user. The method will return all the payments for this user.
 
 ###### Example of usage: ######
 ```
 <?php
-	$krbWallet = new Karbo();
+	$bfrWallet = new Befrank();
 	$paymentId = "b661ca369901e91f51083bb131ad26c5c04d725bc0dfe3692e63fc4e093d331e";
-	$krbWallet->getPayments($paymentId);
+	$bfrWallet->getPayments($paymentId);
 ?>
 ```
 ###### Output data: ######
@@ -146,17 +146,17 @@ Please note: fee param is a mandatory and should not be less than 0.0001 KRB.
 ###### Example of usage: ######
 ```
 <?php
-	$krbWallet = new Karbo();
-	$paymentID = $krbWallet->genPaymentId();
-	$fee = $krbWallet->genPaymentId();
+	$bfrWallet = new Befrank();
+	$paymentID = $bfrWallet->genPaymentId();
+	$fee = $bfrWallet->genPaymentId();
 	$unlock_time = 0;
 	$transData = [
 		[
 			"amount" => "100",
-			"address" => "KeRRSeu1z1PYQz9eTWy8W4efGTMB9ZCbxayX85rRr5w8E1gqDMujgtPLeGPmvcT1DPjoU7iCpbrn7KJxMpJhUTfrJjcKGpt"
+			"address" => "FeRRSeu1z1PYQz9eTWy8W4efGTMB9ZCbxayX85rRr5w8E1gqDMujgtPLeGPmvcT1DPjoU7iCpbrn7KJxMpJhUTfrJjcKGpt"
 		]
 	];
-	$krbWallet->transfer($transData, $paymentID, $fee, $unlock_time);
+	$bfrWallet->transfer($transData, $paymentID, $fee, $unlock_time);
 ?>
 ```
 ###### Output data: ######
@@ -178,8 +178,8 @@ Store wallet data.
 ###### Example of usage: ######
 ```
 <?php
-	$krbWallet = new Karbo();
-	$balance = $krbWallet->store();
+	$bfrWallet = new Befrank();
+	$balance = $bfrWallet->store();
 ?>
 ```
 ###### Output data: ######
@@ -196,8 +196,8 @@ Erases simplewallet's internal state but keeps safe the wallet.bin. The method s
 ###### Example of usage: ######
 ```
 <?php
-	$krbWallet = new Karbo();
-	$balance = $krbWallet->reset();
+	$bfrWallet = new Befrank();
+	$balance = $bfrWallet->reset();
 ?>
 ```
 ###### Output data: ######
@@ -214,7 +214,7 @@ Generate payment id
 ###### Example of usage: ######
 ```
 <?php
-	Karbo::genPaymentId();
+	Befrank::genPaymentId();
 ?>
 ```
 ###### Output data: ######
@@ -229,7 +229,7 @@ Check if address valid
 ###### Example of usage: ######
 ```
 <?php
-	Karbo::checkAddress("KeRRSeu1z1PYQz9eTWy8W4efGTMB9ZCbxayX85rRr5w8E1gqDMujgtPLeGPmvcT1DPjoU7iCpbrn7KJxMpJhUTfrJjcKGpt");
+	Befrank::checkAddress("FeRRSeu1z1PYQz9eTWy8W4efGTMB9ZCbxayX85rRr5w8E1gqDMujgtPLeGPmvcT1DPjoU7iCpbrn7KJxMpJhUTfrJjcKGpt");
 ?>
 ```
 ###### Output data: ######
@@ -244,7 +244,7 @@ Check if payment id valid
 ###### Example of usage: ######
 ```
 <?php
-	Karbo::checkPaymentId("66897070238bc2c47bed4a327f78bed3ece3b87c30b1cb78c535597fd0c19456");
+	Befrank::checkPaymentId("66897070238bc2c47bed4a327f78bed3ece3b87c30b1cb78c535597fd0c19456");
 ?>
 ```
 ###### Output data: ######
@@ -252,6 +252,4 @@ Check if payment id valid
 true
 ```
 
-Based on [Lastick/karbo-api-php](https://github.com/seredat/karbowanec/wiki/Simplewallet-JSON-RPC-API) and [Simplewallet JSON RPC API wiki page](https://github.com/seredat/karbowanec/wiki/Simplewallet-JSON-RPC-API)
-
-Made with <3 by Volbil
+Based on [Lastick/Karbo-api-php](https://github.com/seredat/Befrankwanec/wiki/Simplewallet-JSON-RPC-API) and [Simplewallet JSON RPC API wiki page](https://github.com/seredat/Befrankwanec/wiki/Simplewallet-JSON-RPC-API)

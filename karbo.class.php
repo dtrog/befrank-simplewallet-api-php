@@ -1,6 +1,6 @@
 <?php
 
-class Karbo {
+class Befrank {
 
 	/**
 	 * Host of Simplewallet JSON RPC API
@@ -10,11 +10,10 @@ class Karbo {
 	/**
 	 * Port
 	 */
-	const RPC_PORT = "32348";
+	const RPC_PORT = "18324";
 
 	/**
 	 * Username for authentication
-	 * Keep this field empty, if don't care about security of your KRB :)
 	 */
 	const RPC_USER = "USERNAME";
 
@@ -34,33 +33,32 @@ class Karbo {
 	const RPC_TIMER = 50000;
 
 	/**
-	 * Decimal point, needed for KRB amount calculations
-	 * (don't change this value, because it may cause loss of your KRB)
+	 * Decimal point, needed for BFR amount calculations
+	 * (don't change this value, because it may cause loss of your BFR)
 	 */
-	const DECIMAL_POINT = 12;
+	const DECIMAL_POINT = 2;
 
 	/**
 	 * Number of decimal places
-	 * (you may change this value, if price of KRB goes to high one day)
+	 * (you may change this value, if price of BFR goes to high one day)
 	 */
-	const PREC_POINT = 4;
+	const PREC_POINT = 2;
 
 	/**
 	 * ID of request, you can put here whatever you want
-	 * (actually I don't now purpose of this field, maybe you find out it :D)
 	 */
-	const ID_CONN = "Y7h2LgDrBVh7wbSj";
+	const ID_CONN = "94bfecb761e477d853bbcddb1b78e4b";
 
 	/**
 	 * Fee of transaction
-	 * (100000000 == 0.0001 KRB)
+	 * (100 == 1 BFR)
 	 */
-	const KRB_FEE = 100000000;
+	const KRB_FEE = 100;
 
 	/**
 	 * Transaction mixin
 	 */
-	const KRB_MIXIN = 0;
+	const BFR_MIXIN = 0;
 
 	private $service_host = null;
 	private $service_port = null;
@@ -168,7 +166,7 @@ class Karbo {
 	/**
 	 * balanceFormat()
 	 * Converting balance format
-	 * Example: 100000000 -> 0.0001 ($mode = false) | 0.0001 -> 100000000 ($mode = true)
+	 * Example: 1 -> 100 ($mode = false) | 1 -> 0.01 ($mode = true)
 	 *
 	 * @param string [$balance_src] Balance which needed to be converted
 	 * @param bool [$mode] Type of convertion
@@ -177,9 +175,9 @@ class Karbo {
 		$balance_res = 0;
 		if ($balance_src > 0) {
 			if ($mode) {
-				$balance_res = round($balance_src * pow(10, self::DECIMAL_POINT), 0);
+				$balance_res = round($balance_src * pow(2, self::DECIMAL_POINT), 0);
 			} else {
-				$balance_res = round($balance_src / pow(10, self::DECIMAL_POINT), self::PREC_POINT);
+				$balance_res = round($balance_src / pow(2, self::DECIMAL_POINT), self::PREC_POINT);
 			}
 		}
 
@@ -476,7 +474,7 @@ class Karbo {
 	 * @param string [$address] Addres of Karbo wallet
 	 */
 	public static function checkAddress($address) {
-		$result = preg_match("/^K[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{94}$/", $address);
+		$result = preg_match("/^F[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{94}$/", $address);
 
 		return $result;
 	}
